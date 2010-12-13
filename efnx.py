@@ -8,16 +8,16 @@ def paste(data):
 	p.stdin.close()
 	retcode = p.wait()
 
-def export_model(obj):
+def export_model(obj, lang):
 	i = 0
 	resdir = bpy.utils.user_script_path()
 	#setup the templates
 	modelcode = ''
-	modeltemplatefile = open(resdir+'/model.js', 'r')
+	modeltemplatefile = open(resdir+'/model.'+lang, 'r')
 	modeltemplate = Template(modeltemplatefile.read())
 	modeltemplatefile.close();
 	facecode = ''
-	facetemplatefile = open(resdir+'/face.js', 'r')
+	facetemplatefile = open(resdir+'/face.'+lang, 'r')
 	facetemplate = Template(facetemplatefile.read())
 	facetemplatefile.close()
 
@@ -87,11 +87,11 @@ def export_model(obj):
 	modelcode = modeltemplate.substitute(name=name, facecode=facecode, locx=locx, locy=locy, locz=locz, rotux=rotux, rotuy=rotuy, rotuz=rotuz, ml00=ml00, ml01=ml01, ml02=ml02, ml03=ml03, ml10=ml10, ml11=ml11, ml12=ml12, ml13=ml13, ml20=ml20, ml21=ml21, ml22=ml22, ml23=ml23, ml30=ml30, ml31=ml31, ml32=ml32, ml33=ml33, mw00=mw00, mw01=mw01, mw02=mw02, mw03=mw03, mw10=mw10, mw11=mw11, mw12=mw12, mw13=mw13, mw20=mw20, mw21=mw21, mw22=mw22, mw23=mw23, mw30=mw30, mw31=mw31, mw32=mw32, mw33=mw33)
 	return modelcode
 	
-def export_camera(obj):
+def export_camera(obj, lang):
 	resdir = bpy.utils.user_script_path()
 	#setup the template
 	cameracode = ''
-	cameratemplatefile = open(resdir+'/camera.js', 'r')
+	cameratemplatefile = open(resdir+'/camera.'+lang, 'r')
 	cameratemplate = Template(cameratemplatefile.read())
 	cameratemplatefile.close();
 	
@@ -149,11 +149,11 @@ def export_camera(obj):
 	
 	return cameracode
 
-def export_scene(scene):
+def export_scene(scene, lang):
 	
 	# get scene header template
 	resdir = bpy.utils.user_script_path()
-	scenetemplatefile = open(resdir+'/scene.js', 'r')
+	scenetemplatefile = open(resdir+'/scene.'+lang, 'r')
 	scenetemplate = Template(scenetemplatefile.read())
 	scenetemplatefile.close()
 	
@@ -164,10 +164,10 @@ def export_scene(scene):
 	for object in scene.objects:
 		if(hasattr(object.data, 'faces')):
 			#this object is a mesh
-			scenecode += export_model(object)
+			scenecode += export_model(object, lang)
 			
 		elif(hasattr(object.data, 'lens')):
-			scenecode += export_camera(object)
+			scenecode += export_camera(object, lang)
 			
 		#elif lamp
 	return scenecode

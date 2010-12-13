@@ -1,0 +1,11 @@
+//face #$iface
+		texture = "$texture";
+		normals.push_back($nx); normals.push_back($ny); normals.push_back($nz);
+		normals.push_back($nx); normals.push_back($ny); normals.push_back($nz);
+		normals.push_back($nx); normals.push_back($ny); normals.push_back($nz);
+		vertices.push_back($v1x); vertices.push_back($v1y); vertices.push_back($v1z); 
+		vertices.push_back($v2x); vertices.push_back($v2y); vertices.push_back($v2z);
+		vertices.push_back($v3x); vertices.push_back($v3y); vertices.push_back($v3z);
+		uvs.push_back($t1u); uvs.push_back($t1v);
+		uvs.push_back($t2u); uvs.push_back($t2v);
+		uvs.push_back($t3u); uvs.push_back($t3v);

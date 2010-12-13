@@ -20,12 +20,13 @@ class RENDER_PT_efnx(bpy.types.Panel):
 		split = row.split(percentage=0.5)
 		colL = split.column()
 		colR = split.column()
-		colL.operator("efnx_isom_exportScene", text="Scene to JS")
+		colL.operator("efnx_exportScene_js", text="Scene to JS")
+		colR.operator("efnx_exportScene_objc", text="Scene to Obj-C")
 
 
-class RENDER_OT_efnx(bpy.types.Operator):
+class RENDER_OT_efnx_js(bpy.types.Operator):
 	bl_label = "Export scene to javascript operator"
-	bl_idname = "efnx_isom_exportScene"
+	bl_idname = "efnx_exportScene_js"
 	bl_description = "Export scene to javascript"
 
 	def invoke(self, context, event):
@@ -33,6 +34,20 @@ class RENDER_OT_efnx(bpy.types.Operator):
 		import efnx
 		reload(efnx)
 		self.report("INFO", "Export initiated")
-		efnx.paste(efnx.export_scene(bpy.context.scene))
+		efnx.paste(efnx.export_scene(bpy.context.scene, 'js'))
+		self.report("INFO", "Javascript copied to clipboard")
+		return{"FINISHED"}
+		
+class RENDER_OT_efnx_objc(bpy.types.Operator):
+	bl_label = "Export scene to objective c operator"
+	bl_idname = "efnx_exportScene_objc"
+	bl_description = "Export scene to Objective-C"
+
+	def invoke(self, context, event):
+		import bpy
+		import efnx
+		reload(efnx)
+		self.report("INFO", "Export initiated")
+		efnx.paste(efnx.export_scene(bpy.context.scene, 'objc'))
 		self.report("INFO", "Javascript copied to clipboard")
 		return{"FINISHED"}

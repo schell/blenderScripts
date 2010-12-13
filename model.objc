@@ -1,0 +1,10 @@
+class ${name}_Mesh : public Mesh {
+public:
+	${name}_Mesh() {
+		$facecode
+		matrix.setElements($ml00,$ml01,$ml02,$ml03,  
+						   $ml10,$ml11,$ml12,$ml13,
+ 						   $ml20,$ml21,$ml22,$ml23,
+						   $ml30,$ml31,$ml32,$ml33);
+	}
+};   

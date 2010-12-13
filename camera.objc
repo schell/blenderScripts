@@ -1,0 +1,15 @@
+class ${name}_Camera : public Camera {
+	${name}_Camera() {
+		name = "$name";
+		type = "$type";
+		fovy = $angle;
+		znear = $clip_start;
+		zfar = $clip_end;
+		depthOfField = $dof_distance;
+		lensSize = $lens;
+		matrix.setElements($ml00, $ml10, $ml20, $ml30,
+						   $ml01, $ml11, $ml21, $ml31,
+						   $ml02, $ml12, $ml22, $ml32,
+						   $ml03, $ml13, $ml23, $ml33);
+	}
+};
